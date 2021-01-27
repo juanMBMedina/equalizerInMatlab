@@ -1,0 +1,620 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>interfazEqualizador</title><meta name="generator" content="MATLAB 9.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-25"><meta name="DC.source" content="interfazEqualizador.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="keyword">function</span> varargout = interfazEqualizador(varargin)
+<span class="comment">%INTERFAZEQUALIZADOR MATLAB code file for interfazEqualizador.fig</span>
+<span class="comment">%      INTERFAZEQUALIZADOR, by itself, creates a new INTERFAZEQUALIZADOR or raises the existing</span>
+<span class="comment">%      singleton*.</span>
+<span class="comment">%</span>
+<span class="comment">%      H = INTERFAZEQUALIZADOR returns the handle to a new INTERFAZEQUALIZADOR or the handle to</span>
+<span class="comment">%      the existing singleton*.</span>
+<span class="comment">%</span>
+<span class="comment">%      INTERFAZEQUALIZADOR('Property','Value',...) creates a new INTERFAZEQUALIZADOR using the</span>
+<span class="comment">%      given property value pairs. Unrecognized properties are passed via</span>
+<span class="comment">%      varargin to interfazEqualizador_OpeningFcn.  This calling syntax produces a</span>
+<span class="comment">%      warning when there is an existing singleton*.</span>
+<span class="comment">%</span>
+<span class="comment">%      INTERFAZEQUALIZADOR('CALLBACK') and INTERFAZEQUALIZADOR('CALLBACK',hObject,...) call the</span>
+<span class="comment">%      local function named CALLBACK in INTERFAZEQUALIZADOR.M with the given input</span>
+<span class="comment">%      arguments.</span>
+<span class="comment">%</span>
+<span class="comment">%      *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one</span>
+<span class="comment">%      instance to run (singleton)".</span>
+<span class="comment">%</span>
+<span class="comment">% See also: GUIDE, GUIDATA, GUIHANDLES</span>
+
+<span class="comment">% Edit the above text to modify the response to help interfazEqualizador</span>
+
+<span class="comment">% Last Modified by GUIDE v2.5 13-Nov-2020 22:55:07</span>
+
+<span class="comment">% Begin initialization code - DO NOT EDIT</span>
+gui_Singleton = 1;
+gui_State = struct(<span class="string">'gui_Name'</span>,       mfilename, <span class="keyword">...</span>
+                   <span class="string">'gui_Singleton'</span>,  gui_Singleton, <span class="keyword">...</span>
+                   <span class="string">'gui_OpeningFcn'</span>, @interfazEqualizador_OpeningFcn, <span class="keyword">...</span>
+                   <span class="string">'gui_OutputFcn'</span>,  @interfazEqualizador_OutputFcn, <span class="keyword">...</span>
+                   <span class="string">'gui_LayoutFcn'</span>,  [], <span class="keyword">...</span>
+                   <span class="string">'gui_Callback'</span>,   []);
+<span class="keyword">if</span> nargin &amp;&amp; ischar(varargin{1})
+   gui_State.gui_Callback = str2func(varargin{1});
+<span class="keyword">end</span>
+
+<span class="keyword">if</span> nargout
+    [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});
+<span class="keyword">else</span>
+    gui_mainfcn(gui_State, varargin{:});
+<span class="keyword">end</span>
+<span class="comment">% End initialization code - DO NOT EDIT</span>
+<span class="comment">% --- Executes just before interfazEqualizador is made visible.</span>
+<span class="keyword">function</span> interfazEqualizador_OpeningFcn(hObject, eventdata, handles, varargin)
+<span class="comment">% This function has no output args, see OutputFcn.</span>
+<span class="comment">% hObject    handle to figure</span>
+<span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+<span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+<span class="comment">% varargin   unrecognized PropertyName/PropertyValue pairs from the</span>
+<span class="comment">%            command line (see VARARGIN)</span>
+<span class="comment">% Choose default command line output for interfazEqualizador</span>
+handles.output = hObject;
+<span class="comment">% Update handles structure</span>
+clc
+handles.Fs = 44100;
+handles.signal = [];
+handles.filter_signal = [];
+handles.Pxx = [];
+handles.Frecs = [];
+handles.PxxH = []; <span class="comment">% Respuestas de filtros</span>
+handles.H_frec = [];
+handles.plt   = plot(1,1,<span class="string">'Color'</span>,[240 255 0]/255);
+line1 = line(1,1,<span class="string">'Color'</span>,[ 19 146   6]/255,<span class="string">'LineWidth'</span>,1.5);
+line2 = line(1,1,<span class="string">'Color'</span>,[142 255 138]/255,<span class="string">'LineWidth'</span>,1.5);
+line3 = line(1,1,<span class="string">'Color'</span>,[227  59  18]/255,<span class="string">'LineWidth'</span>,1.5);
+line4 = line(1,1,<span class="string">'Color'</span>,[135  18 227]/255,<span class="string">'LineWidth'</span>,1.5);
+line5 = line(1,1,<span class="string">'Color'</span>,[240  59 215]/255,<span class="string">'LineWidth'</span>,1.5);
+line6 = line(1,1,<span class="string">'Color'</span>,[ 61 209 204]/255,<span class="string">'LineWidth'</span>,1.5);
+line7 = line(1,1,<span class="string">'Color'</span>,[  0  35 253]/255,<span class="string">'LineWidth'</span>,1.5);
+handles.lines = [line1 line2 line3 line4 line5 line6 line7];
+mostrar_etiquetas();
+handles.audio = audioplayer(0, handles.Fs);
+set(handles.grafica, <span class="string">'GridColor'</span>, [1 1 1]);
+set(handles.grafica, <span class="string">'Color'</span>, [0 0 0]);
+<span class="comment">% Reiniciar Botones.</span>
+set(handles.checkButFil1 ,<span class="string">'Value'</span>,0);
+set(handles.checkButFil2 ,<span class="string">'Value'</span>,0);
+set(handles.checkButFil3 ,<span class="string">'Value'</span>,0);
+set(handles.checkButFil4 ,<span class="string">'Value'</span>,0);
+set(handles.checkButFil5 ,<span class="string">'Value'</span>,0);
+set(handles.checkButFil6 ,<span class="string">'Value'</span>,0);
+set(handles.checkButFil7 ,<span class="string">'Value'</span>,0);
+set(handles.audioCompleto,<span class="string">'Value'</span>,0);
+set(handles.audioFiltrado,<span class="string">'Value'</span>,0);
+<span class="comment">% Filtros Dise&ntilde;ados.</span>
+fil1 = load (<span class="string">'Filtros/F20_200_44100.mat'</span>);
+fil2 = load (<span class="string">'Filtros/F200_500_44100.mat'</span>);
+fil3 = load (<span class="string">'Filtros/F500_2000_44100.mat'</span>);
+fil4 = load (<span class="string">'Filtros/F2000_4000_44100.mat'</span>);
+fil5 = load (<span class="string">'Filtros/F4000_8000_44100.mat'</span>);
+fil6 = load (<span class="string">'Filtros/F8000_12000_44100.mat'</span>);
+fil7 = load (<span class="string">'Filtros/F12000_20000_44100.mat'</span>);
+handles.filters = [fil1.Hd fil2.Hd fil3.Hd fil4.Hd <span class="keyword">...</span>
+                   fil5.Hd fil6.Hd fil7.Hd ];
+guidata(hObject, handles);
+<span class="comment">% UIWAIT makes interfazEqualizador wait for user response (see UIRESUME)</span>
+<span class="comment">% uiwait(handles.figure1);</span>
+<span class="comment">% --- Outputs from this function are returned to the command line.</span>
+<span class="keyword">function</span> varargout = interfazEqualizador_OutputFcn(hObject, eventdata, handles)
+<span class="comment">% varargout  cell array for returning output args (see VARARGOUT);</span>
+<span class="comment">% hObject    handle to figure</span>
+<span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+<span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+<span class="comment">% Get default command line output from handles structure</span>
+varargout{1} = handles.output;
+<span class="comment">% --- Executes on button press in cargarArchivo.</span>
+<span class="keyword">function</span> cargarArchivo_Callback(hObject, eventdata, handles)
+<span class="comment">% hObject    handle to cargarArchivo (see GCBO)</span>
+<span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+<span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+clc
+disp(<span class="string">'Load data.'</span>)
+[file,path] = uigetfile(<span class="string">'*.wav'</span>);
+<span class="keyword">if</span> ~isequal(file,0)
+   disp([<span class="string">'User selected '</span>, fullfile(path,file)]);
+   [y, Fs] = audioread(fullfile(path,file));
+   <span class="keyword">if</span> Fs == handles.Fs
+       [~,cols] = size(y);
+       <span class="keyword">if</span> cols &gt; 1
+           y = sum(y,2)/cols; <span class="comment">% Suma cada columna y Promedia</span>
+       <span class="keyword">end</span>
+       [Pxx,F] = periodogram(y,rectwin(length(y)),<span class="keyword">...</span>
+                          2^nextpow2(length(y)),Fs);
+       handles.signal = y;
+       handles.Frecs = F;
+       handles.Pxx = Pxx;
+       <span class="comment">% Graficar.</span>
+       mostrar_grafica(1, handles.plt, F, Pxx);
+       set(handles.grafica,<span class="string">'Xlim'</span>, [0 max(F/1e3)]);
+       set(handles.grafica,<span class="string">'Ylim'</span>, [min(handles.plt.YData) 100]);
+       <span class="comment">%RTA en frecuencia Filtros.</span>
+       handles.H_frec = Fs/2*linspace(0,1,1024);
+       handles.PxxH = freqz(handles.filters, length(handles.H_frec));
+   <span class="keyword">else</span>
+       msgbox([<span class="string">'Frecuencia: '</span> num2str(Fs) <span class="string">'[Hz] invalida'</span>],<span class="string">'Fs'</span>,<span class="string">'error'</span>);
+   <span class="keyword">end</span>
+<span class="keyword">else</span>
+    <span class="keyword">if</span> isempty(handles.signal)
+        msgbox(<span class="string">'Cargue un archivo .wav'</span>,<span class="string">'Error'</span>,<span class="string">'error'</span>);
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+guidata(hObject, handles);
+<span class="comment">% --- Executes on button press in Filtrar.</span>
+<span class="keyword">function</span> Filtrar_Callback(hObject, eventdata, handles)
+<span class="comment">% hObject    handle to Filtrar (see GCBO)</span>
+<span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+<span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+<span class="keyword">for</span> i = 1 : length(handles.lines)
+    handles.lines(i).XData = 1;
+    handles.lines(i).YData = 1;
+<span class="keyword">end</span>
+<span class="keyword">if</span> ~isempty(handles.signal)
+    vCheck = [get(handles.checkButFil1, <span class="string">'Value'</span>) <span class="keyword">...</span>
+              get(handles.checkButFil2, <span class="string">'Value'</span>) <span class="keyword">...</span>
+              get(handles.checkButFil3, <span class="string">'Value'</span>) <span class="keyword">...</span>
+              get(handles.checkButFil4, <span class="string">'Value'</span>) <span class="keyword">...</span>
+              get(handles.checkButFil5, <span class="string">'Value'</span>) <span class="keyword">...</span>
+              get(handles.checkButFil6, <span class="string">'Value'</span>) <span class="keyword">...</span>
+              get(handles.checkButFil7, <span class="string">'Value'</span>) <span class="keyword">...</span>
+              ];
+    cantFiltros = length(vCheck);
+	y = handles.signal * ones(1,cantFiltros);
+    clc;
+    <span class="keyword">for</span> i = 1 : cantFiltros
+        <span class="keyword">if</span> vCheck(i)
+            y(:,i) = filter(handles.filters(i),y(:,i));
+            disp([<span class="string">'Filtro '</span> num2str(i) <span class="string">' Aplicado...'</span>])
+        <span class="keyword">else</span>
+            y(:,i) = 0;
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    y = sum(y,2)/sum(vCheck);
+    [Pxx,F] = periodogram(y,rectwin(length(y)),<span class="keyword">...</span>
+                          2^nextpow2(length(y)),handles.Fs);
+	mostrar_grafica(1, handles.plt, F, Pxx);
+	set(handles.grafica,<span class="string">'XLim'</span>, [0 max(F/1e3)]);
+    handles.filter_signal = y;
+<span class="keyword">else</span>
+    msgbox(<span class="string">'Cargue un archivo .wav'</span>,<span class="string">'Error'</span>,<span class="string">'error'</span>)
+<span class="keyword">end</span>
+guidata(hObject, handles);
+<span class="comment">% --- Executes on button press in repAudio.</span>
+<span class="keyword">function</span> repAudio_Callback(hObject, eventdata, handles)
+<span class="comment">% hObject    handle to repAudio (see GCBO)</span>
+<span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+<span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+<span class="keyword">if</span> ~isempty(handles.signal)
+    <span class="keyword">if</span> get(handles.audioFiltrado, <span class="string">'Value'</span>) &amp;&amp; ~isempty(handles.filter_signal)
+        msgbox(<span class="string">'Reproduciendo audio Filtrado.'</span>)
+        y = handles.filter_signal;
+    <span class="keyword">else</span>
+        msgbox(<span class="string">'Reproduciendo audio Original.'</span>)
+        y = handles.signal;
+    <span class="keyword">end</span>
+    handles.audio = audioplayer(y, handles.Fs);
+    set(handles.audio,<span class="string">'TimerPeriod'</span>, 0.1);
+    set(handles.audio,<span class="string">'TimerFcn'</span>, @(~,~)espectroTiempoReal(y, <span class="keyword">...</span>
+        handles.Fs, handles.audio, handles.plt))
+    mostrar_etiquetas();
+    <span class="keyword">if</span> get(handles.audioCompleto,<span class="string">'Value'</span>)
+        play(handles.audio);
+    <span class="keyword">else</span>
+        play(handles.audio, [1 15*handles.Fs]);
+    <span class="keyword">end</span>
+<span class="keyword">else</span>
+    msgbox(<span class="string">'Cargue un archivo .wav o Filtre el audio.'</span>,<span class="string">'Error'</span>,<span class="string">'error'</span>);
+<span class="keyword">end</span>
+guidata(hObject, handles);
+<span class="comment">% --- Executes during object creation, after setting all properties.</span>
+<span class="keyword">function</span> grafica_CreateFcn(hObject, eventdata, handles)
+<span class="comment">% hObject    handle to grafica (see GCBO)</span>
+<span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+<span class="comment">% handles    empty - handles not created until after all CreateFcns called</span>
+<span class="comment">% Hint: place code in OpeningFcn to populate grafica</span>
+
+<span class="comment">% --- Executes on button press in reinicio.</span>
+<span class="keyword">function</span> reinicio_Callback(hObject, eventdata, handles)
+<span class="comment">% hObject    handle to reinicio (see GCBO)</span>
+<span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+<span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+handles.plt.XData = 1;
+handles.plt.YData = 1;
+<span class="keyword">for</span> i = 1 : length(handles.lines)
+    handles.lines(i).XData = 1;
+    handles.lines(i).YData = 1;
+<span class="keyword">end</span>
+<span class="comment">% % Borra los datos.</span>
+handles.signal = [];
+handles.filter_signal = [];
+handles.Pxx = [];
+handles.Frecs = [];
+handles.PxxH = []; <span class="comment">% Respuestas de filtros</span>
+handles.H_frec = [];
+<span class="comment">% Reiniciar Botones.</span>
+set(handles.checkButFil1 ,<span class="string">'Value'</span>,0);
+set(handles.checkButFil2 ,<span class="string">'Value'</span>,0);
+set(handles.checkButFil3 ,<span class="string">'Value'</span>,0);
+set(handles.checkButFil4 ,<span class="string">'Value'</span>,0);
+set(handles.checkButFil5 ,<span class="string">'Value'</span>,0);
+set(handles.checkButFil6 ,<span class="string">'Value'</span>,0);
+set(handles.checkButFil7 ,<span class="string">'Value'</span>,0);
+set(handles.audioCompleto,<span class="string">'Value'</span>,0);
+set(handles.audioFiltrado,<span class="string">'Value'</span>,0);
+guidata(hObject, handles);
+<span class="comment">% --- Executes on button press in mostrarFiltros.</span>
+<span class="keyword">function</span> mostrarFiltros_Callback(hObject, eventdata, handles)
+<span class="comment">% hObject    handle to mostrarFiltros (see GCBO)</span>
+<span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+<span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+handles.plt.XData = handles.Frecs/1e3;
+handles.plt.YData = 10*log( abs(handles.Pxx) );
+<span class="keyword">if</span> ~isempty(handles.signal)
+    vCheck = [get(handles.checkButFil1, <span class="string">'Value'</span>) <span class="keyword">...</span>
+              get(handles.checkButFil2, <span class="string">'Value'</span>) <span class="keyword">...</span>
+              get(handles.checkButFil3, <span class="string">'Value'</span>) <span class="keyword">...</span>
+              get(handles.checkButFil4, <span class="string">'Value'</span>) <span class="keyword">...</span>
+              get(handles.checkButFil5, <span class="string">'Value'</span>) <span class="keyword">...</span>
+              get(handles.checkButFil6, <span class="string">'Value'</span>) <span class="keyword">...</span>
+              get(handles.checkButFil7, <span class="string">'Value'</span>) <span class="keyword">...</span>
+              ];
+    <span class="keyword">for</span> i = 1 : length(vCheck)
+        <span class="keyword">if</span> vCheck(i)
+            handles.lines(i).XData = handles.H_frec/1e3;
+            handles.lines(i).YData = 10*log( abs(handles.PxxH(:,i)) );
+        <span class="keyword">else</span>
+            handles.lines(i).XData = 1;
+            handles.lines(i).YData = 1;
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">else</span>
+    msgbox(<span class="string">'Cargue un archivo .wav'</span>,<span class="string">'Error'</span>,<span class="string">'error'</span>);
+<span class="keyword">end</span>
+</pre><img vspace="5" hspace="5" src="interfazEqualizador_01.png" alt=""> <img vspace="5" hspace="5" src="interfazEqualizador_02.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+function varargout = interfazEqualizador(varargin)
+%INTERFAZEQUALIZADOR MATLAB code file for interfazEqualizador.fig
+%      INTERFAZEQUALIZADOR, by itself, creates a new INTERFAZEQUALIZADOR or raises the existing
+%      singleton*.
+%
+%      H = INTERFAZEQUALIZADOR returns the handle to a new INTERFAZEQUALIZADOR or the handle to
+%      the existing singleton*.
+%
+%      INTERFAZEQUALIZADOR('Property','Value',...) creates a new INTERFAZEQUALIZADOR using the
+%      given property value pairs. Unrecognized properties are passed via
+%      varargin to interfazEqualizador_OpeningFcn.  This calling syntax produces a
+%      warning when there is an existing singleton*.
+%
+%      INTERFAZEQUALIZADOR('CALLBACK') and INTERFAZEQUALIZADOR('CALLBACK',hObject,...) call the
+%      local function named CALLBACK in INTERFAZEQUALIZADOR.M with the given input
+%      arguments.
+%
+%      *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one
+%      instance to run (singleton)".
+%
+% See also: GUIDE, GUIDATA, GUIHANDLES
+
+% Edit the above text to modify the response to help interfazEqualizador
+
+% Last Modified by GUIDE v2.5 13-Nov-2020 22:55:07
+
+% Begin initialization code - DO NOT EDIT
+gui_Singleton = 1;
+gui_State = struct('gui_Name',       mfilename, ...
+                   'gui_Singleton',  gui_Singleton, ...
+                   'gui_OpeningFcn', @interfazEqualizador_OpeningFcn, ...
+                   'gui_OutputFcn',  @interfazEqualizador_OutputFcn, ...
+                   'gui_LayoutFcn',  [], ...
+                   'gui_Callback',   []);
+if nargin && ischar(varargin{1})
+   gui_State.gui_Callback = str2func(varargin{1});
+end
+
+if nargout
+    [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});
+else
+    gui_mainfcn(gui_State, varargin{:});
+end
+% End initialization code - DO NOT EDIT
+% REPLACE_WITH_DASH_DASH- Executes just before interfazEqualizador is made visible.
+function interfazEqualizador_OpeningFcn(hObject, eventdata, handles, varargin)
+% This function has no output args, see OutputFcn.
+% hObject    handle to figure
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+% varargin   unrecognized PropertyName/PropertyValue pairs from the
+%            command line (see VARARGIN)
+% Choose default command line output for interfazEqualizador
+handles.output = hObject;
+% Update handles structure
+clc
+handles.Fs = 44100;
+handles.signal = [];
+handles.filter_signal = [];
+handles.Pxx = [];
+handles.Frecs = [];
+handles.PxxH = []; % Respuestas de filtros
+handles.H_frec = [];
+handles.plt   = plot(1,1,'Color',[240 255 0]/255);
+line1 = line(1,1,'Color',[ 19 146   6]/255,'LineWidth',1.5);
+line2 = line(1,1,'Color',[142 255 138]/255,'LineWidth',1.5);
+line3 = line(1,1,'Color',[227  59  18]/255,'LineWidth',1.5);
+line4 = line(1,1,'Color',[135  18 227]/255,'LineWidth',1.5);
+line5 = line(1,1,'Color',[240  59 215]/255,'LineWidth',1.5);
+line6 = line(1,1,'Color',[ 61 209 204]/255,'LineWidth',1.5);
+line7 = line(1,1,'Color',[  0  35 253]/255,'LineWidth',1.5);
+handles.lines = [line1 line2 line3 line4 line5 line6 line7];
+mostrar_etiquetas();
+handles.audio = audioplayer(0, handles.Fs);
+set(handles.grafica, 'GridColor', [1 1 1]);
+set(handles.grafica, 'Color', [0 0 0]);
+% Reiniciar Botones.
+set(handles.checkButFil1 ,'Value',0);
+set(handles.checkButFil2 ,'Value',0);
+set(handles.checkButFil3 ,'Value',0);
+set(handles.checkButFil4 ,'Value',0);
+set(handles.checkButFil5 ,'Value',0);
+set(handles.checkButFil6 ,'Value',0);
+set(handles.checkButFil7 ,'Value',0);
+set(handles.audioCompleto,'Value',0);
+set(handles.audioFiltrado,'Value',0);
+% Filtros Diseñados.
+fil1 = load ('Filtros/F20_200_44100.mat');
+fil2 = load ('Filtros/F200_500_44100.mat');
+fil3 = load ('Filtros/F500_2000_44100.mat');
+fil4 = load ('Filtros/F2000_4000_44100.mat');
+fil5 = load ('Filtros/F4000_8000_44100.mat');
+fil6 = load ('Filtros/F8000_12000_44100.mat');
+fil7 = load ('Filtros/F12000_20000_44100.mat');
+handles.filters = [fil1.Hd fil2.Hd fil3.Hd fil4.Hd ...
+                   fil5.Hd fil6.Hd fil7.Hd ];
+guidata(hObject, handles);
+% UIWAIT makes interfazEqualizador wait for user response (see UIRESUME)
+% uiwait(handles.figure1);
+% REPLACE_WITH_DASH_DASH- Outputs from this function are returned to the command line.
+function varargout = interfazEqualizador_OutputFcn(hObject, eventdata, handles)
+% varargout  cell array for returning output args (see VARARGOUT);
+% hObject    handle to figure
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+% Get default command line output from handles structure
+varargout{1} = handles.output;
+% REPLACE_WITH_DASH_DASH- Executes on button press in cargarArchivo.
+function cargarArchivo_Callback(hObject, eventdata, handles)
+% hObject    handle to cargarArchivo (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+clc
+disp('Load data.')
+[file,path] = uigetfile('*.wav');
+if ~isequal(file,0)
+   disp(['User selected ', fullfile(path,file)]);
+   [y, Fs] = audioread(fullfile(path,file));
+   if Fs == handles.Fs
+       [~,cols] = size(y);
+       if cols > 1
+           y = sum(y,2)/cols; % Suma cada columna y Promedia
+       end
+       [Pxx,F] = periodogram(y,rectwin(length(y)),...
+                          2^nextpow2(length(y)),Fs);
+       handles.signal = y;
+       handles.Frecs = F;
+       handles.Pxx = Pxx;
+       % Graficar.
+       mostrar_grafica(1, handles.plt, F, Pxx);
+       set(handles.grafica,'Xlim', [0 max(F/1e3)]);
+       set(handles.grafica,'Ylim', [min(handles.plt.YData) 100]);
+       %RTA en frecuencia Filtros.
+       handles.H_frec = Fs/2*linspace(0,1,1024);
+       handles.PxxH = freqz(handles.filters, length(handles.H_frec));
+   else
+       msgbox(['Frecuencia: ' num2str(Fs) '[Hz] invalida'],'Fs','error');
+   end
+else
+    if isempty(handles.signal)
+        msgbox('Cargue un archivo .wav','Error','error');
+    end
+end
+guidata(hObject, handles);
+% REPLACE_WITH_DASH_DASH- Executes on button press in Filtrar.
+function Filtrar_Callback(hObject, eventdata, handles)
+% hObject    handle to Filtrar (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+for i = 1 : length(handles.lines)
+    handles.lines(i).XData = 1;
+    handles.lines(i).YData = 1;
+end
+if ~isempty(handles.signal)
+    vCheck = [get(handles.checkButFil1, 'Value') ...
+              get(handles.checkButFil2, 'Value') ...
+              get(handles.checkButFil3, 'Value') ...
+              get(handles.checkButFil4, 'Value') ...
+              get(handles.checkButFil5, 'Value') ...
+              get(handles.checkButFil6, 'Value') ...
+              get(handles.checkButFil7, 'Value') ...
+              ];
+    cantFiltros = length(vCheck);
+	y = handles.signal * ones(1,cantFiltros);
+    clc;
+    for i = 1 : cantFiltros
+        if vCheck(i)
+            y(:,i) = filter(handles.filters(i),y(:,i));
+            disp(['Filtro ' num2str(i) ' Aplicado...'])
+        else
+            y(:,i) = 0;
+        end
+    end
+    y = sum(y,2)/sum(vCheck);
+    [Pxx,F] = periodogram(y,rectwin(length(y)),...
+                          2^nextpow2(length(y)),handles.Fs);
+	mostrar_grafica(1, handles.plt, F, Pxx);
+	set(handles.grafica,'XLim', [0 max(F/1e3)]);
+    handles.filter_signal = y;
+else
+    msgbox('Cargue un archivo .wav','Error','error')
+end
+guidata(hObject, handles);
+% REPLACE_WITH_DASH_DASH- Executes on button press in repAudio.
+function repAudio_Callback(hObject, eventdata, handles)
+% hObject    handle to repAudio (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+if ~isempty(handles.signal)
+    if get(handles.audioFiltrado, 'Value') && ~isempty(handles.filter_signal)
+        msgbox('Reproduciendo audio Filtrado.')
+        y = handles.filter_signal;
+    else
+        msgbox('Reproduciendo audio Original.')
+        y = handles.signal;
+    end
+    handles.audio = audioplayer(y, handles.Fs);
+    set(handles.audio,'TimerPeriod', 0.1);
+    set(handles.audio,'TimerFcn', @(~,~)espectroTiempoReal(y, ...
+        handles.Fs, handles.audio, handles.plt))
+    mostrar_etiquetas();
+    if get(handles.audioCompleto,'Value')
+        play(handles.audio);
+    else
+        play(handles.audio, [1 15*handles.Fs]);
+    end
+else
+    msgbox('Cargue un archivo .wav o Filtre el audio.','Error','error');
+end
+guidata(hObject, handles);
+% REPLACE_WITH_DASH_DASH- Executes during object creation, after setting all properties.
+function grafica_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to grafica (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+% Hint: place code in OpeningFcn to populate grafica
+
+% REPLACE_WITH_DASH_DASH- Executes on button press in reinicio.
+function reinicio_Callback(hObject, eventdata, handles)
+% hObject    handle to reinicio (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+handles.plt.XData = 1;
+handles.plt.YData = 1;
+for i = 1 : length(handles.lines)
+    handles.lines(i).XData = 1;
+    handles.lines(i).YData = 1;
+end
+% % Borra los datos.
+handles.signal = [];
+handles.filter_signal = [];
+handles.Pxx = [];
+handles.Frecs = [];
+handles.PxxH = []; % Respuestas de filtros
+handles.H_frec = [];
+% Reiniciar Botones.
+set(handles.checkButFil1 ,'Value',0);
+set(handles.checkButFil2 ,'Value',0);
+set(handles.checkButFil3 ,'Value',0);
+set(handles.checkButFil4 ,'Value',0);
+set(handles.checkButFil5 ,'Value',0);
+set(handles.checkButFil6 ,'Value',0);
+set(handles.checkButFil7 ,'Value',0);
+set(handles.audioCompleto,'Value',0);
+set(handles.audioFiltrado,'Value',0);
+guidata(hObject, handles);
+% REPLACE_WITH_DASH_DASH- Executes on button press in mostrarFiltros.
+function mostrarFiltros_Callback(hObject, eventdata, handles)
+% hObject    handle to mostrarFiltros (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+handles.plt.XData = handles.Frecs/1e3;
+handles.plt.YData = 10*log( abs(handles.Pxx) );
+if ~isempty(handles.signal)
+    vCheck = [get(handles.checkButFil1, 'Value') ...
+              get(handles.checkButFil2, 'Value') ...
+              get(handles.checkButFil3, 'Value') ...
+              get(handles.checkButFil4, 'Value') ...
+              get(handles.checkButFil5, 'Value') ...
+              get(handles.checkButFil6, 'Value') ...
+              get(handles.checkButFil7, 'Value') ...
+              ];
+    for i = 1 : length(vCheck)
+        if vCheck(i)
+            handles.lines(i).XData = handles.H_frec/1e3;
+            handles.lines(i).YData = 10*log( abs(handles.PxxH(:,i)) );
+        else
+            handles.lines(i).XData = 1;
+            handles.lines(i).YData = 1;
+        end
+    end
+else
+    msgbox('Cargue un archivo .wav','Error','error');
+end    
+##### SOURCE END #####
+--></body></html>
